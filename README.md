@@ -10,6 +10,21 @@
 
 ---
 
+## 下载 / Releases
+
+最新安装包在仓库的 **Releases** 页面：  
+👉 https://github.com/HarlanYuan-Lab/part-number-manager/releases
+
+| 版本 | 安装包 |
+|---|---|
+| V2.0（集中 PostgreSQL 版，Latest） | [`PartNumberManagerV2Setup.exe`](https://github.com/HarlanYuan-Lab/part-number-manager/releases/download/v2.0.0/PartNumberManagerV2Setup.exe) |
+| V1.0（本地 SQLite 版） | [`PartNumberManagerSetup.exe`](https://github.com/HarlanYuan-Lab/part-number-manager/releases/download/v1.0.0/PartNumberManagerSetup.exe) |
+
+> V2.0 安装包默认连接参数为示例占位符（`YOUR_SERVER_IP` / `CHANGE_ME_DB_PASSWORD`），
+> 使用前请按 `V2.0/README.md` 配置你自己的服务器信息。
+
+---
+
 ## 核心功能（两版通用）
 
 - **自动生成零件号**：输入零件名即自动编号。
