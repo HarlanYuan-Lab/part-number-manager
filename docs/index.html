@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Part Number Manager — Automatic part-number generation &amp; management</title>
+<meta name="description" content="Windows desktop tool for automatic part-number generation and management. V1.0 local SQLite edition and V2.0 central PostgreSQL edition.">
+<style>
+  :root{ --primary:#2f54eb; --primary-dark:#1f3bb5; --primary-light:#eef2ff;
+         --ink:#1f2430; --muted:#5b6472; --line:#e6e8ef; --bg:#fafbfd; --card:#fff; }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Segoe UI",system-ui,-apple-system,sans-serif;color:var(--ink);background:var(--bg);line-height:1.6}
+  a{color:var(--primary);text-decoration:none}
+  a:hover{text-decoration:underline}
+  .wrap{max-width:1040px;margin:0 auto;padding:0 24px}
+  header{background:linear-gradient(135deg,var(--primary-dark),var(--primary));color:#fff;padding:56px 0 60px}
+  header h1{margin:0 0 10px;font-size:34px;letter-spacing:.5px}
+  header p{color:#dce4ff;font-size:17px;margin:0 0 22px;max-width:720px}
+  .btn{display:inline-block;background:#fff;color:var(--primary-dark);font-weight:600;padding:11px 20px;border-radius:8px;margin-right:10px;margin-bottom:10px;box-shadow:0 2px 8px rgba(0,0,0,.15)}
+  .btn.ghost{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.6)}
+  section{padding:38px 0}
+  h2{margin:0 0 16px;font-size:22px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:20px}
+  .card h3{margin:0 0 8px;font-size:16px}
+  .card p{margin:0;color:var(--muted);font-size:14.5px}
+  .chip{display:inline-block;background:var(--primary-light);color:var(--primary-dark);border-radius:20px;padding:2px 10px;font-size:12.5px;font-weight:600;margin:0 6px 6px 0}
+  table{border-collapse:collapse;width:100%;background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+  th,td{text-align:left;padding:12px 16px;border-bottom:1px solid var(--line)}
+  th{background:#f5f7fb}
+  tr:last-child td{border-bottom:none}
+  code{background:#f2f4f8;padding:2px 6px;border-radius:5px;font-size:13px}
+  footer{background:#f0f2f7;padding:26px 0;color:var(--muted);font-size:13.5px}
+  .steps{margin:0;padding-left:20px}
+  .steps li{margin:8px 0}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <h1>Part Number Manager</h1>
+    <p>Automatic part-number generation &amp; management for Windows (tkinter). Assembly / Part / Standard types, configurable prefixes and suffix length, never-reused numbers, Excel export, multi-user central mode.</p>
+    <a class="btn" href="https://github.com/HarlanYuan-Lab/part-number-manager/releases">Download</a>
+    <a class="btn ghost" href="https://github.com/HarlanYuan-Lab/part-number-manager">GitHub</a>
+    <a class="btn ghost" href="https://github.com/HarlanYuan-Lab/part-number-manager#readme">Readme</a>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <h2>Two editions, one UI</h2>
+    <div class="grid">
+      <div class="card"><h3>V1.0 — Local (SQLite)</h3>
+        <p>No server needed. Each database is an independent SQLite file on your machine. Great for personal / single-PC use.</p>
+        <span class="chip">SQLite</span><span class="chip">Offline</span><span class="chip">Excel export</span>
+      </div>
+      <div class="card"><h3>V2.0 — Central (PostgreSQL)</h3>
+        <p>All data lives on a central PostgreSQL server (e.g. on your NAS via Docker). Account roles, multi-user collaboration, imports V1.0 databases.</p>
+        <span class="chip">PostgreSQL</span><span class="chip">Multi-user</span><span class="chip">Roles</span>
+      </div>
+      <div class="card"><h3>Modern UI</h3>
+        <p>All-English interface, modern blue theme, growing tabs, inline copyable results — no popup noise.</p>
+        <span class="chip">tkinter</span><span class="chip">English UI</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap">
+    <h2>Core features</h2>
+    <div class="grid">
+      <div class="card"><h3>Automatic part numbers</h3><p>Type a part name and get a number instantly: Assembly / Part / Standard each with its own configurable prefix.</p></div>
+      <div class="card"><h3>Never reused</h3><p>Each type counts upward from <code>prefix+0001</code>; deleted numbers are never reassigned; edit collisions auto-increment.</p></div>
+      <div class="card"><h3>Manage &amp; search</h3><p>Search by part number or name, edit, delete, and multi-select (Shift / Ctrl) for bulk operations.</p></div>
+      <div class="card"><h3>Export to Excel</h3><p>One click exports the whole database to a spreadsheet. Full import/export backup is supported.</p></div>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap">
+    <h2>Download &amp; Releases</h2>
+    <table>
+      <tr><th>Edition</th><th>Installer</th><th>Size</th></tr>
+      <tr>
+        <td>V2.0 · Central (PostgreSQL) <span class="chip">Latest</span></td>
+        <td><a href="https://github.com/HarlanYuan-Lab/part-number-manager/releases/download/v2.0.0/PartNumberManagerV2Setup.exe">PartNumberManagerV2Setup.exe</a></td>
+        <td>~25 MB</td>
+      </tr>
+      <tr>
+        <td>V1.0 · Local (SQLite)</td>
+        <td><a href="https://github.com/HarlanYuan-Lab/part-number-manager/releases/download/v1.0.0/PartNumberManagerSetup.exe">PartNumberManagerSetup.exe</a></td>
+        <td>~20 MB</td>
+      </tr>
+    </table>
+    <p style="color:var(--muted);font-size:14px">More at the <a href="https://github.com/HarlanYuan-Lab/part-number-manager/releases">Releases page</a>.</p>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap">
+    <h2>Quick start</h2>
+    <ol class="steps">
+      <li><strong>V1.0</strong>: run the installer, create a database, start creating part numbers. No server required.</li>
+      <li><strong>V2.0</strong>: deploy the server first (<code>V2.0/server/docker-compose.yml</code>), then configure your server in <code>V2.0/client/part_manager/config.py</code> (host, port, database, role, password) and install the client.</li>
+      <li>Full docs: <a href="https://github.com/HarlanYuan-Lab/part-number-manager/tree/main/V1.0#readme">V1.0 README</a> · <a href="https://github.com/HarlanYuan-Lab/part-number-manager/tree/main/V2.0#readme">V2.0 README</a>.</li>
+    </ol>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    Part Number Manager · <a href="https://github.com/HarlanYuan-Lab/part-number-manager">github.com/HarlanYuan-Lab/part-number-manager</a>
+    &nbsp;·&nbsp; License: <a href="https://github.com/HarlanYuan-Lab/part-number-manager/blob/main/LICENSE">MIT</a>
+  </div>
+</footer>
+
+</body>
+</html>
