@@ -1,0 +1,22 @@
+# Build / cache artifacts — never commit binaries or caches
+build/
+dist/
+__pycache__/
+*.py[cod]
+*.egg-info/
+
+# PyInstaller working dir
+*.spec.bak
+
+# Local runtime / remembered-login config (may contain obfuscated credentials)
+*.json
+!*.example.json
+
+# V2 local remembered-login data
+config.json
+
+# OS / editor
+Thumbs.db
+.DS_Store
+.idea/
+.vscode/

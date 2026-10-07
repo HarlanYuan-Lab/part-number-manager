@@ -1,0 +1,61 @@
+# =============================================================================
+# Part Number Manager V2.0 - Central Database Server (Docker Compose)
+# -----------------------------------------------------------------------------
+# Run this on your NAS (e.g. fnOS / Feiniu) to create a central PostgreSQL
+# database server that the Part Number Manager V2.0 client will connect to.
+#
+# NOTE (open-source): IPs, ports, DB role and password below are EXAMPLE
+# placeholders. Change the values marked "CHANGE ME" before first run.
+#
+# Data is persisted on the NAS at a dedicated data folder:
+#     /path/to/PN Manager Server/data      (CHANGE ME: your NAS data folder)
+#
+# Quick start (on the NAS, from the folder containing this file):
+#     docker compose up -d
+#
+# Connection info (used later by the V2.0 client, see client config.py):
+#     Host: YOUR_SERVER_IP                  (CHANGE ME)
+#     Port: 5432                            (PostgreSQL, CHANGE ME if you wish)
+#     DB  : pnmanager
+#     User: pnmanager
+#     Pass: see POSTGRES_PASSWORD below (CHANGE ME before first run)
+#
+# Web admin UI (Adminer):  http://YOUR_SERVER_IP:8080
+#     select "PostgreSQL", host=pn-manager-db, db/user/pass as above.
+# =============================================================================
+
+version: "3.8"
+
+services:
+  # --- Central database server (PostgreSQL) --------------------------------
+  pn-manager-db:
+    image: postgres:16
+    container_name: pn-manager-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: pnmanager                # DB role / owner
+      POSTGRES_PASSWORD: CHANGE_ME_DB_PASSWORD   # CHANGE ME
+      POSTGRES_DB: pnmanager                  # database name
+    ports:
+      - "5432:5432"            # host port 5432 -> container PostgreSQL 5432
+    volumes:
+      # Bind a DEDICATED, empty sub-folder for the database data.
+      # (Do NOT mount the folder that also holds docker-compose.yml — PostgreSQL
+      #  refuses to init into a non-empty directory.)
+      - "/path/to/PN Manager Server/data:/var/lib/postgresql/data"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U pnmanager -d pnmanager"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 15s
+
+  # --- Optional lightweight web admin (Adminer) -----------------------------
+  pn-manager-admin:
+    image: adminer:latest
+    container_name: pn-manager-admin
+    restart: unless-stopped
+    depends_on:
+      - pn-manager-db
+    ports:
+      - "8080:8080"            # http://YOUR_SERVER_IP:8080
